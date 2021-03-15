@@ -1,12 +1,12 @@
 # PowerShell Script to Search for Forensic Artifacts. Detect malicious code on Exchange Server 
-# which could compromise the system, this after exploitation of Hafnium webshell injection.
+# which could compromise the system, this after zero day vulnerabilities or exploitation of Hafnium webshell injection.
 # Run on Exchange Server Verion 2013/2016/2019 to Detect Hafnium webshells are present.
-Write-Host "Determine vulnerables files ..." -fore yellow
+Write-Host "Determine zero day vulnerabilities and webshell injection ..." -fore yellow
 $wroot = "$Env:SystemDrive\inetpub\wwwroot\aspnet_client\"
 $Path1 = "$Env:ExchangeInstallPath\FrontEnd\HttpProxy\ecp\auth\TimeoutLogout.aspx"
 $Path2 = "$Env:ExchangeInstallPath\FrontEnd\HttpProxy\owa\auth\Current\"
 $Path3 = "$Env:ExchangeInstallPath\FrontEnd\HttpProxy\owa\auth\"
-Write-Host "Should not contain .aspx files under this folder or sub folders $wroot" -fore yellow
+Write-Host "wwwroot should not contain .aspx files under path $wroot" -fore yellow
 $Files = @(Get-ChildItem $wroot -Recurse -Include *.aspx)
 if ($Files.length -eq 0) {
   Write-Host "No malicious files found." -fore green
